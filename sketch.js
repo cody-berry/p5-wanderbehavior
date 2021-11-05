@@ -28,6 +28,6 @@ function draw() {
     background(234, 34, 24)
     p.show()
     p.update()
-    p.applyForce(p.wander())
+    p.applyForce(p.actual_wander())
     p.edges()
 }
