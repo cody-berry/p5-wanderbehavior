@@ -4,7 +4,7 @@
 
 version comments
 .   make basic Particle class with show, update, applyForce, and edges
-    random wander
+.   twitchy wander
     first wander circle, wanderPoint
     second wander circle, apply a force
 
@@ -28,6 +28,6 @@ function draw() {
     background(234, 34, 24)
     p.show()
     p.update()
-    p.applyForce(gravity)
+    p.applyForce(p.wander())
     p.edges()
 }

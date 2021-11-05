@@ -14,6 +14,8 @@ class Particle {
 
     update() {
         this.vel.add(this.acc)
+        this.vel.limit(15) // we don't want our vehicle to go too fast
+        // because then our vehicle would eventually have an infinite position
         this.pos.add(this.vel)
         this.acc.setMag(0)
     }
@@ -44,6 +46,13 @@ class Particle {
             this.pos.y = height - this.r
         }
     }
+
+    // makes us wander around the room
+    wander() {
+        let force = p5.Vector.random2D()
+        return force
+    }
+
 }
 
 
