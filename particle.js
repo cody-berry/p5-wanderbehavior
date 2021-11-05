@@ -9,7 +9,7 @@ class Particle {
 
     show() {
         noStroke()
-        circle(this.pos.x, this.pos.y, this.r)
+        circle(this.pos.x, this.pos.y, this.r*2)
     }
 
     update() {
@@ -22,6 +22,27 @@ class Particle {
         // F = ma. This particle should be much lighter than 1 unit, but for
         // the sake of programming, m = 1, so a = F.
         this.acc.add(f)
+    }
+
+    edges() {
+        // x's
+
+        if (this.pos.x + this.r > width) { // right
+            this.pos.x = this.r // we want to wrap around
+        }
+        if (this.pos.x - this.r < 0) { // left
+            this.pos.x = width - this.r
+        }
+
+        // y's
+
+        if (this.pos.y + this.r > height) { // bottom (positive y's are
+            // downward)
+            this.pos.y = this.r
+        }
+        if (this.pos.y - this.r < 0) { // top
+            this.pos.y = height - this.r
+        }
     }
 }
 

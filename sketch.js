@@ -3,7 +3,7 @@
 @date 2021-11-5
 
 version comments
-|   make basic Particle class with show, update, applyForce, and edges
+.   make basic Particle class with show, update, applyForce, and edges
     random wander
     first wander circle, wanderPoint
     second wander circle, apply a force
@@ -29,4 +29,5 @@ function draw() {
     p.show()
     p.update()
     p.applyForce(gravity)
+    p.edges()
 }
