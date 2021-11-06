@@ -9,12 +9,31 @@ class Particle {
         this.maxSpeed = 5 // our maximum speed
 
         this.wanderAngle = 0 // this is the meaning of our point on our circle.
+
+        // what is our path?
+        // we need a current path because what happens if we warp to the
+        // other edge?
+        this.currentPath = []
+        this.path = [this.currentPath]
     }
 
     show() {
         noStroke()
         fill(0, 0, 100)
         circle(this.pos.x, this.pos.y, this.r*2)
+
+        // we can draw our path!
+        noFill()
+        stroke(0, 0, 100, 20)
+        strokeWeight(2)
+        for (let path of this.path) {
+
+            beginShape()
+            for (let v of path) {
+                vertex(v.x, v.y)
+            }
+            endShape()
+        }
     }
 
     update() {
@@ -23,6 +42,9 @@ class Particle {
         // because then our vehicle would eventually have an infinite position
         this.pos.add(this.vel)
         this.acc.setMag(0)
+        // we should append not our actual position, but a copy of it.
+        this.currentPath.push(this.pos.copy())
+
     }
 
     applyForce(f) {
@@ -32,13 +54,20 @@ class Particle {
     }
 
     edges() {
+
+        // did we hit an edge? ...
+        let hitEdge = false
         // x's
 
         if (this.pos.x + this.r > width) { // right
             this.pos.x = this.r // we want to wrap around
+            // in any of these, we should set hitEdge to true. Here...
+            hitEdge = true
         }
         if (this.pos.x - this.r < 0) { // left
             this.pos.x = width - this.r
+            // ...here...
+            hitEdge = true
         }
 
         // y's
@@ -46,10 +75,22 @@ class Particle {
         if (this.pos.y + this.r > height) { // bottom (positive y's are
             // downward)
             this.pos.y = this.r
+            // ...here...
+            hitEdge = true
         }
         if (this.pos.y - this.r < 0) { // top
             this.pos.y = height - this.r
+            // ...and here...
+            hitEdge = true
         }
+        // ...and if so...
+        if (hitEdge) {
+            // ...we should reset our path...
+            this.currentPath = []
+            // ...and add it.
+            this.path.push(this.currentPath)
+        }
+
     }
 
     // makes us wander around the room. This wander is deprecated because it
