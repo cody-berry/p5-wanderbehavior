@@ -64,7 +64,7 @@ class Particle {
             // in any of these, we should set hitEdge to true. Here...
             hitEdge = true
         }
-        if (this.pos.x - this.r < 0) { // left
+        else if (this.pos.x - this.r < 0) { // left
             this.pos.x = width - this.r
             // ...here...
             hitEdge = true
@@ -72,13 +72,13 @@ class Particle {
 
         // y's
 
-        if (this.pos.y + this.r > height) { // bottom (positive y's are
+        else if (this.pos.y + this.r > height) { // bottom (positive y's are
             // downward)
             this.pos.y = this.r
             // ...here...
             hitEdge = true
         }
-        if (this.pos.y - this.r < 0) { // top
+        else if (this.pos.y - this.r < 0) { // top
             this.pos.y = height - this.r
             // ...and here...
             hitEdge = true
